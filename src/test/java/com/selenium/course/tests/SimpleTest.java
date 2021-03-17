@@ -48,7 +48,6 @@ public class SimpleTest {
         list.selectByValue("lohi");
         list.selectByVisibleText("Name (Z to A)");
 
-
         WebElement addToCart = driver.findElement(By.xpath("//div[text()='Sauce Labs Backpack']//ancestor::div[@class='inventory_item']//button"));
         addToCart.click();
 
@@ -56,7 +55,7 @@ public class SimpleTest {
 
         assertEquals(badge.getText(), "1");
 
-     //   Thread.sleep(3000);
+      //  Thread.sleep(3000);
     }
 
 
