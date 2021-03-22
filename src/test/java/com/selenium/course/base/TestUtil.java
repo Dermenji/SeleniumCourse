@@ -1,6 +1,7 @@
 package com.selenium.course.base;
 
 import com.selenium.course.driver.DriverFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
@@ -10,10 +11,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+@Slf4j
 public class TestUtil {
     public WebDriver driver;
     private String url;
     private int implicitWait;
+    private String browser;
 
 
     @BeforeSuite
@@ -24,6 +27,7 @@ public class TestUtil {
             url = config.getProperty("urlAddress");
             implicitWait = Integer.parseInt(config.getProperty("implicitWait"));
             // browser to be taken from property file
+            browser = config.getProperty("browser");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,7 +44,17 @@ public class TestUtil {
     }
 
     private void setupBrowserDriver() {
-        driver = DriverFactory.getFirefoxDriver(implicitWait);
+        switch (browser) {
+            case "chrome":
+                driver = DriverFactory.getChromeDriver(implicitWait);
+                break;
+            case "firefox":
+                driver = DriverFactory.getFirefoxDriver(implicitWait);
+                break;
+            default:
+                //  log.error("Unsupported browser type");
+                throw new IllegalStateException("Unsupported browser type");
+        }
         // chrome implementation
     }
 

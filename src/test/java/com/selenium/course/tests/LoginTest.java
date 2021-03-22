@@ -35,7 +35,7 @@ public class LoginTest extends TestUtil {
     }
 
     @Test(dataProvider = "login-data-file")
-    public void executeSimpleTest(String userName, String password) throws InterruptedException {
+    public void executeSimpleTest(String userName, String password) {
         //  driver.get("https://www.saucedemo.com/");
 
         WebElement userNameInput = driver.findElement(By.id("user-name"));
