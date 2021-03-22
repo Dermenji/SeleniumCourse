@@ -19,4 +19,10 @@ public class ProductListerPage extends BasePage {
         addToCartButton.click();
     }
 
+    public String getProductPrice(String productName){
+        String xpathFormatted = String.format(PRODUCT_PRICE_BY_NAME, productName);
+        WebElement productPrice = driver.findElement(By.xpath(xpathFormatted));
+        return productPrice.getText();
+    }
+
 }
