@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'maven'
-        jdk 'jdk-1.8.0_172'
+        jdk 'Java8'
     }
      parameters {
         //string(name: 'APP_VERSION', defaultValue: '1.0.0', description: 'select application version for deployment')
@@ -15,10 +15,15 @@ pipeline {
                echo 'Deploying.... ${APP_VERSION}'
         }
     }
+         stage('CheckOut from Github') {
+            steps {
+               git 'https://github.com/Dermenji/SeleniumCourse.git'
+        }
+    }
         stage('Execute Automated Tests') {
             steps {
                 echo 'Testing..'
-                bat 'mvn -Dtestng.dtd.http=true clean test'
+                bat 'mvn -Dtest=ProductTests clean test'
             }
         }
     }
