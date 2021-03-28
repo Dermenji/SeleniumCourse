@@ -23,7 +23,7 @@ public class ProductTests extends TestUtil {
         //Soft assert
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(productListerPage.getProductPrice("Sauce Labs Backpack"), "$29.99");
-        softAssert.assertEquals(productListerPage.getProductPrice("Sauce Labs Backpack"), "$29.98");
+        softAssert.assertEquals(productListerPage.getProductPrice("Sauce Labs Backpack"), "$29.99");
         softAssert.assertEquals(productListerPage.getProductPrice("Sauce Labs Backpack"), "$29.99");
 
         softAssert.assertAll();
