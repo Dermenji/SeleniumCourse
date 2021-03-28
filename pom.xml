@@ -72,9 +72,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
                     <!-- Suite testng xml file to consider for test execution -->
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/suits/suite.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/suits/suit.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
