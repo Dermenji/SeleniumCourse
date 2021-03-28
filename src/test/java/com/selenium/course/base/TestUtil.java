@@ -3,9 +3,7 @@ package com.selenium.course.base;
 import com.selenium.course.driver.DriverFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,7 +17,7 @@ public class TestUtil {
     private String browser;
 
 
-    @BeforeSuite
+ /*   @BeforeSuite
     public void readConfigProperties() {
         try (FileInputStream configFile = new FileInputStream("src/test/resources/config.properties")) {
             Properties config = new Properties();
@@ -31,9 +29,9 @@ public class TestUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
-    @BeforeTest
+    @BeforeMethod
     public void setUp() {
         setupBrowserDriver();
         loadUrl();
@@ -44,6 +42,16 @@ public class TestUtil {
     }
 
     private void setupBrowserDriver() {
+        try (FileInputStream configFile = new FileInputStream("src/test/resources/config.properties")) {
+            Properties config = new Properties();
+            config.load(configFile);
+            url = config.getProperty("urlAddress");
+            implicitWait = Integer.parseInt(config.getProperty("implicitWait"));
+            // browser to be taken from property file
+            browser = config.getProperty("browser");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         switch (browser) {
             case "chrome":
                 driver = DriverFactory.getChromeDriver(implicitWait);
@@ -58,7 +66,7 @@ public class TestUtil {
         // chrome implementation
     }
 
-    @AfterTest
+    @AfterMethod
     public void tearDown() {
         driver.quit();
     }
